@@ -1,23 +1,23 @@
 #!/bin/bash
 
 # Mise à jour des dépôts et installation des paquets requis
-/usr/bin/sudo /usr/bin/apt-get update && /usr/bin/sudo /usr/bin/apt-get install -y ca-certificates apt-transport-https
+apt-get update && apt-get install -y ca-certificates apt-transport-https
 
 # Ajout du dépôt UniFi dans le fichier de sources
-echo 'deb [ arch=amd64,arm64 ] https://www.ui.com/downloads/unifi/debian stable ubiquiti' | /usr/bin/sudo /usr/bin/tee /etc/apt/sources.list.d/100-ubnt-unifi.list
+echo 'deb [ arch=amd64,arm64 ] https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/apt/sources.list.d/100-ubnt-unifi.list
 
 # Téléchargement de la clé de confiance du dépôt UniFi
-/usr/bin/sudo /usr/bin/wget -O /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ui.com/unifi/unifi-repo.gpg
+wget -O /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ui.com/unifi/unifi-repo.gpg
 
 # Ajout de la clé MongoDB
-/usr/bin/wget -qO - https://www.mongodb.org/static/pgp/server-3.6.asc | /usr/bin/sudo /usr/bin/apt-key add -
+wget -qO - https://www.mongodb.org/static/pgp/server-3.6.asc | apt-key add -
 
 # Ajout du dépôt MongoDB dans le fichier de sources
-echo "deb [trusted=yes] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/3.6 multiverse" | /usr/bin/sudo /usr/bin/tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+echo "deb [trusted=yes] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/3.6 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.6.list
 
 # Mise à jour des dépôts après l'ajout des nouveaux
-/usr/bin/sudo /usr/bin/apt-get update
+apt-get update
 
 # Installation de UniFi
-/usr/bin/sudo /usr/bin/apt-get install -y unifi
+apt-get install -y unifi
 
